@@ -1,0 +1,6 @@
+.DS_Store
+*.key
+*.pem
+*.crt
+*.env
+ansible/.vault_pass
