@@ -2,26 +2,29 @@ services:
   db:
     image: mariadb:10.11
     container_name: weee_db
-    restart: unless_stopped
-    environment: 
+    restart: unless-stopped
+    environment:
       MYSQL_DATABASE: ${DB_NAME}
       MYSQL_USER: ${DB_USER}
       MYSQL_PASSWORD: ${DB_PASSWORD}
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
-  volumes:
-    - db_data:/var/lib/mysql
-  networks:
-    - internal_net
-app:
-  image: php:8.2-fpm-alpine
-  container_name: weee_app
-  restart: unless-stopped
-  volumes:
-    - ./app:/var/www/html
-  networks:
-    - internal_net
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - internal_net
+
+  app:
+    image: php:8.2-fpm-alpine
+    container_name: weee_app
+    restart: unless-stopped
+    volumes:
+      - ./app:/var/www/html
+    networks:
+      - internal_net
+
 volumes:
   db_data:
+
 networks:
   internal_net:
     driver: bridge
