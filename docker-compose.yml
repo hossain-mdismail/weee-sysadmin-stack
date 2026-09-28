@@ -1,4 +1,4 @@
-heredoc> services:
+services:
   db:
     image: mariadb:10.11
     container_name: weee_db
@@ -35,4 +35,3 @@ volumes:
 networks:
   internal_net:
     driver: bridge
-
