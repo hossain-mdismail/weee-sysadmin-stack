@@ -1,4 +1,4 @@
-services:
+heredoc> services:
   db:
     image: mariadb:10.11
     container_name: weee_db
@@ -14,9 +14,16 @@ services:
       - internal_net
 
   app:
-    image: php:8.2-fpm-alpine
+    build:
+      context: ./php
+      dockerfile: Dockerfile
     container_name: weee_app
     restart: unless-stopped
+    environment:
+      DB_HOST: db
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
     volumes:
       - ./app:/var/www/html
     networks:
@@ -28,3 +35,4 @@ volumes:
 networks:
   internal_net:
     driver: bridge
+
